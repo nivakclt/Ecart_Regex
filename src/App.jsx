@@ -8,6 +8,8 @@ import Header from './components/Header'
 import Pnf from './pages/Pnf'
 import Wishlist from './pages/Wishlist'
 
+import './bootstrap.min.css'
+
 import { Routes,Route } from 'react-router-dom'
 
 
@@ -18,9 +20,9 @@ function App() {
     <Header/>
       <Routes>
         <Route path='' element={<Home/>}/>
-        <Route path='prd' element={<ProductView/>}/>
-        <Route path='wlt' element={<Wishlist/>}/>
-        <Route path='crt' element={<Cart/>}/>
+        <Route path='product' element={<ProductView/>}/>
+        <Route path='wish' element={<Wishlist/>}/>
+        <Route path='cart' element={<Cart/>}/>
         <Route path='/*' element={<Pnf/>}/>
       </Routes>
       <Footer/>

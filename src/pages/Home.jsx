@@ -1,4 +1,5 @@
-
+import { FaCartPlus } from "react-icons/fa"
+import { FaHeartCirclePlus } from "react-icons/fa6"
 
 function Home() {
   return (
@@ -31,8 +32,13 @@ function Home() {
                                 </div>
                             </div>
                             {/* <!-- Product actions--> */}
-                            <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            <div className="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                                <button className="btn">
+                                    <FaCartPlus className="text-success"/>
+                                </button>
+                                <button className="btn">
+                                    <FaHeartCirclePlus className="text-danger"/>
+                                </button>
                             </div>
                         </div>
                     </div>

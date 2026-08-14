@@ -5,6 +5,8 @@ import { FaOpencart } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
+import { Link } from 'react-router-dom';
+
 
 function Header() {
   return (
@@ -20,8 +22,8 @@ function Header() {
           </Navbar.Brand>
           <input type="search" placeholder='Enter keyword to search' className="form-control w-50 border border-dark" />
           <div className="d-flex gap-3">
-            <button className="btn btn-outline-dark"><FaShoppingCart className='text-success'/>{' '}cart{' '} <span className='badge bg-dark'>0</span> </button>
-            <button className="btn btn-outline-dark"><FaHeart className='text-danger'/>{' '}Wishlist{' '} <span className='badge bg-dark'>0</span> </button>
+            <Link to={'/cart'} className="btn btn-outline-dark" style={{backgroundColor:'black'}}><FaShoppingCart className='text-success'/>{' '}cart{' '} <span className='badge bg-dark'>0</span> </Link>
+            <Link to={'/wish'} className="btn btn-outline-dark" style={{backgroundColor:'black'}}><FaHeart className='text-danger'/>{' '}Wishlist{' '} <span className='badge bg-dark'>0</span> </Link>
           </div>
         </Container>
       </Navbar>
