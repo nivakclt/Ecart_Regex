@@ -1,6 +1,8 @@
 import { FaCartPlus } from "react-icons/fa"
 import { FaHeartCirclePlus } from "react-icons/fa6"
 
+import { Link } from "react-router-dom"
+
 function Home() {
   return (
     <>
@@ -21,7 +23,9 @@ function Home() {
                     <div className="col mb-5">
                         <div className="card h-100">
                             {/* <!-- Product image--> */}
+                            <Link to={'product/1'}>
                             <img className="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            </Link>
                             {/* <!-- Product details--> */}
                             <div className="card-body p-4">
                                 <div className="text-center">
