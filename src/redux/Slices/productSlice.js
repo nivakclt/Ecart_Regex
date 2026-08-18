@@ -6,12 +6,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await axios.get("https://dummyjson.com/products");
-
-    sessionStorage.setItem(
-      "products",
-      JSON.stringify(response.data.products)
-    );
-
+    sessionStorage.setItem("products",JSON.stringify(response.data.products))
     return response.data;
   }
 );

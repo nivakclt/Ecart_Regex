@@ -1,18 +1,16 @@
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchProducts } from "../redux/slices/productSlice";
+import { addtoCart } from "../redux/Slices/cardSlice";
 
 function Home() {
     const dispatch=useDispatch();
 
-    
     const {products,error,pending}=useSelector(state=>state.productReducer)
     console.log(products)
-
-
 
     useEffect(()=>{
         dispatch(fetchProducts());
@@ -73,20 +71,12 @@ function Home() {
                     </div>
 
                     <div className="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-around">
-
-                      <Link
-                        to="/cart"
-                        className="text-success"
-                      >
-                        <FaCartPlus />
-                      </Link>
-
-                      <Link
-                        to="/wishlist"
-                        className="text-danger"
-                      >
-                       <FaHeartCirclePlus/>
-                      </Link>
+                      <button className="btn" onClick={()=>{dispatch(addtoCart(product))}}>
+                        <FaCartPlus className="text-success"/>
+                      </button>
+                      <button className="btn">
+                      <FaHeartCirclePlus className="text-danger"/>
+                      </button>
 
                     </div>
                   </div>
