@@ -1,19 +1,22 @@
-
-import { FaStar } from "react-icons/fa6";
 import { useSelector } from "react-redux";
+import { FaStar } from "react-icons/fa6";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../redux/slices/productSlice";
 
 function ProductView() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.productReducer);
 
-  const { products } = useSelector(
-    (state) => state.productReducer
-  );
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, products.length]);
 
-  const detail = products?.find(
-    (product) => product.id == id
-  );
-
+  const detail = products?.find((product) => product.id == id);
 
   return (
     <>
@@ -22,17 +25,11 @@ function ProductView() {
 
         <div className="container">
           <div className="row">
-
             <div className="col-sm-12 col-md-6">
-              <img
-                src={detail?.thumbnail}
-                alt={detail?.title}
-                width={"50%"}
-              />
+              <img src={detail?.thumbnail} alt={detail?.title} width={"50%"} />
             </div>
 
             <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-center">
-
               <h2>{detail?.title}</h2>
 
               <h4 className="text-end">
@@ -40,9 +37,7 @@ function ProductView() {
                 <p>{detail?.category}</p>
               </h4>
 
-              <p style={{ textAlign: "justify" }}>
-                {detail?.description}
-              </p>
+              <p style={{ textAlign: "justify" }}>{detail?.description}</p>
 
               <h6>
                 Rating:
@@ -52,12 +47,8 @@ function ProductView() {
                 </span>
               </h6>
 
-              <h4>
-                ${detail?.price}
-              </h4>
-
+              <h4>${detail?.price}</h4>
             </div>
-
           </div>
         </div>
       </div>
