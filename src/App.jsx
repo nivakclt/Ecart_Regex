@@ -20,7 +20,7 @@ function App() {
     <Header/>
       <Routes>
         <Route path='' element={<Home/>}/>
-        <Route path='product' element={<ProductView/>}/>
+        <Route path='product/:id' element={<ProductView/>}/>
         <Route path='wish' element={<Wishlist/>}/>
         <Route path='cart' element={<Cart/>}/>
         <Route path='/*' element={<Pnf/>}/>

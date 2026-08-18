@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { FaStar } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,14 +7,13 @@ function ProductView() {
   const { id } = useParams();
 
   const { products } = useSelector(
-    (state) => state.productReducer.products
+    (state) => state.productReducer
   );
 
   const detail = products?.find(
     (product) => product.id == id
   );
 
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -28,7 +27,7 @@ function ProductView() {
               <img
                 src={detail?.thumbnail}
                 alt={detail?.title}
-                width={"100%"}
+                width={"50%"}
               />
             </div>
 
