@@ -8,7 +8,7 @@ import Header from './components/Header'
 import Pnf from './pages/Pnf'
 import Wishlist from './pages/Wishlist'
 
-import './bootstrap.min.css'
+
 
 import { Routes,Route } from 'react-router-dom'
 

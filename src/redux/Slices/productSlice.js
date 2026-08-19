@@ -18,14 +18,24 @@ const productSlice = createSlice({
     pending: false,
     products: [],
     error: "",
+    productCopy:[],
   },
 
-  reducers: {},
+  reducers: {
+    searchProducts: (state, action) => {
+      const searchkey = action.payload.toLowerCase();
+      state.products = state.productCopy.filter((product) =>
+        product.title.toLowerCase().includes(searchkey)
+      );
+    }
+  },
 
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.pending = false;
-      state.products = action.payload.products;    });
+      state.products = action.payload.products;
+      state.productCopy = action.payload.products;
+      });
 
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.pending = false;
@@ -39,3 +49,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+export const { searchProducts } = productSlice.actions;

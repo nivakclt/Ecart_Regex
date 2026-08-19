@@ -5,12 +5,16 @@ import { Link } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchProducts } from "../redux/slices/productSlice";
 import { addtoCart } from "../redux/Slices/cardSlice";
+import { addtoWishlist } from "../redux/Slices/wishSlices";
+import { GrFormPrevious } from "react-icons/gr";
+import { MdNavigateNext } from "react-icons/md";
 
 function Home() {
     const dispatch=useDispatch();
 
     const {products,error,pending}=useSelector(state=>state.productReducer)
     console.log(products)
+
 
     useEffect(()=>{
         dispatch(fetchProducts());
@@ -74,7 +78,7 @@ function Home() {
                       <button className="btn" onClick={()=>{dispatch(addtoCart(product))}}>
                         <FaCartPlus className="text-success"/>
                       </button>
-                      <button className="btn">
+                      <button className="btn" onClick={()=>{dispatch(addtoWishlist(product))}}>
                       <FaHeartCirclePlus className="text-danger"/>
                       </button>
 
@@ -88,6 +92,17 @@ function Home() {
 
         </div>
       </section>
+      <div>
+        <div className="container d-flex justify-content-center align-items-center gap-2 my-3">
+          <button className="btn btn-outline-light">
+            <GrFormPrevious />
+          </button>
+          <span>1/3</span>
+          <button className="btn btn-outline-light">
+            <MdNavigateNext />
+          </button>
+        </div>
+      </div>
         </>
 
   )

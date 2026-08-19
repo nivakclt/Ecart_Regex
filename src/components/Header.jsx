@@ -6,12 +6,18 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { searchProducts } from '../redux/Slices/Productslice';
+
+
 
 
 function Header() {
 
   const {cart}=useSelector(state=>state.cartReducer)
+  const {wishlist}=useSelector(state=>state.wishListReducer)
+  const dispatch=useDispatch();
+ 
   return (
     <>
             {/* <!-- Navigation--> */}
@@ -23,10 +29,10 @@ function Header() {
            {' '}
             ReduxCart
           </Navbar.Brand>
-          <input type="search" placeholder='Enter keyword to search' className="form-control w-50 border border-dark" />
+          <input type="search" onChange={(e) => dispatch(searchProducts(e.target.value))} placeholder='Enter keyword to search' className="form-control w-50 border border-dark" />
           <div className="d-flex gap-3">
             <Link to={'/cart'} className="btn btn-outline-dark" style={{backgroundColor:'black'}}><FaShoppingCart className='text-success'/>{' '}cart{' '} <span className='badge bg-dark'>{cart.length}</span> </Link>
-            <Link to={'/wish'} className="btn btn-outline-dark" style={{backgroundColor:'black'}}><FaHeart className='text-danger'/>{' '}Wishlist{' '} <span className='badge bg-dark'>0</span> </Link>
+            <Link to={'/wish'} className="btn btn-outline-dark" style={{backgroundColor:'black'}}><FaHeart className='text-danger'/>{' '}Wishlist{' '} <span className='badge bg-dark'>{wishlist.length}</span> </Link>
           </div>
         </Container>
       </Navbar>
@@ -34,5 +40,4 @@ function Header() {
     </>
   )
 }
-
 export default Header
