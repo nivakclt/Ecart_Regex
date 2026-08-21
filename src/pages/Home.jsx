@@ -8,11 +8,12 @@ import { addtoCart } from "../redux/Slices/cardSlice";
 import { addtoWishlist } from "../redux/Slices/wishSlices";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
+import { nextPage, prevPage } from "../redux/Slices/productSlice";
 
 function Home() {
     const dispatch=useDispatch();
 
-    const {products,error,pending}=useSelector(state=>state.productReducer)
+    const {products,error,pending,currentPage}=useSelector(state=>state.productReducer)
     console.log(products)
 
 
@@ -20,8 +21,21 @@ function Home() {
         dispatch(fetchProducts());
     },[dispatch])
 
+    const productsPerPage=10;
+    const totalPages=Math.ceil((products.length)/productsPerPage)
+    const endIndex=currentPage*10
+    const startIndex=endIndex-10
 
-    
+    const handleNext=()=>{
+      if(currentPage<totalPages)
+        dispatch(nextPage());
+    }
+
+    const handlePrev=()=>{
+      if(currentPage>1)
+        dispatch(prevPage());
+    }
+
   return (
     <>
 
@@ -52,7 +66,7 @@ function Home() {
           ) : (
             <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-              {products.map((product) => (
+              {products.slice(startIndex,endIndex).map((product) => (
                 <div className="col mb-5" key={product.id}>
                   <div className="card h-100">
 
@@ -94,11 +108,11 @@ function Home() {
       </section>
       <div>
         <div className="container d-flex justify-content-center align-items-center gap-2 my-3">
-          <button className="btn btn-outline-light">
+          <button className="btn btn-outline-light" onClick={handlePrev}>
             <GrFormPrevious />
           </button>
-          <span>1/3</span>
-          <button className="btn btn-outline-light">
+          <span>{currentPage}</span>
+          <button className="btn btn-outline-light" onClick={handleNext}>
             <MdNavigateNext />
           </button>
         </div>

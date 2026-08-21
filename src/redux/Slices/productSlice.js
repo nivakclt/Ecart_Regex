@@ -19,6 +19,8 @@ const productSlice = createSlice({
     products: [],
     error: "",
     productCopy:[],
+    currentPage:1
+
   },
 
   reducers: {
@@ -27,6 +29,11 @@ const productSlice = createSlice({
       state.products = state.productCopy.filter((product) =>
         product.title.toLowerCase().includes(searchkey)
       );
+    },nextPage:(state,action)=>{
+      state.currentPage+=1;
+    },
+    prevPage:(state,action)=>{
+      state.currentPage -= 1;
     }
   },
 
@@ -49,4 +56,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { searchProducts } = productSlice.actions;
+export const { searchProducts,nextPage,prevPage } = productSlice.actions;

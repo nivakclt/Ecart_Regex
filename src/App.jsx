@@ -7,12 +7,10 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Pnf from './pages/Pnf'
 import Wishlist from './pages/Wishlist'
-
-
-
 import { Routes,Route } from 'react-router-dom'
 
 
+import './bootstrap.min.css'
 function App() {
 
   return (
