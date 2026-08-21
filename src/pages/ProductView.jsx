@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../redux/slices/productSlice";
 
+
 function ProductView() {
   const { id } = useParams();
   const dispatch = useDispatch();
