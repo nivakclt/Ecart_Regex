@@ -37,7 +37,7 @@ function Wishlist() {
                   </div>
 
                   <div className="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
-                    <button className="btn"  className="btn btn-light fs-4 "
+                    <button className="btn btn-light fs-4 "
                         onClick={() => {
                           handleAddToCart(product);
                         }}>
@@ -46,8 +46,7 @@ function Wishlist() {
                       />
                     </button>
 
-                    <button
-                      className="btn"  className="btn btn-light fs-4"
+                    <button  className="btn btn-light fs-4"
                       onClick={() => {
                         dispatch(removedFromWishlist(product.id));
                       }}

@@ -30,10 +30,10 @@ const productSlice = createSlice({
       state.products = state.productCopy.filter((product) =>
         product.title.toLowerCase().includes(searchkey)
       );
-    },nextPage:(state,action)=>{
+    },nextPage:(state)=>{
       state.currentPage+=1;
     },
-    prevPage:(state,action)=>{
+    prevPage:(state)=>{
       state.currentPage -= 1;
     }
   },
@@ -45,12 +45,12 @@ const productSlice = createSlice({
       state.productCopy = action.payload.products;
       });
 
-    builder.addCase(fetchProducts.rejected, (state, action) => {
+    builder.addCase(fetchProducts.rejected, (state) => {
       state.pending = false;
       state.error = "api call failed";
     });
 
-    builder.addCase(fetchProducts.pending, (state, action) => {
+    builder.addCase(fetchProducts.pending, (state) => {
       state.pending = true;
     });
   },

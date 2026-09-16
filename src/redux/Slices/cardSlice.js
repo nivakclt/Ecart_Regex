@@ -29,10 +29,7 @@ const cartSlice = createSlice({
             icon: 'success',
             confirmButtonText: 'OK'
           })
-        }
-    },
-    
-
+        },
     removeFromCart:(state,action)=>{
         state.cart=state.cart.filter((item) => item.id!=action.payload)
         alert("item removed")
@@ -51,10 +48,10 @@ const cartSlice = createSlice({
             product.quantity-=1
         }
     },
-    checkout:(state,action)=>{
+    checkout:(state)=>{
         state.cart=[]
     }
-    },
+}}
 )
 
 export const { addtoCart , removeFromCart,increaseQuantity,decreaseQuantity,checkout } = cartSlice.actions;
