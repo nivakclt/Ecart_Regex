@@ -7,7 +7,7 @@ import { FaHeart } from "react-icons/fa";
 
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
-import { searchProducts } from '../redux/Slices/productSlice';
+import { searchProducts } from '../redux/Slices/ProductSlice';
 
 
 
