@@ -3,7 +3,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchProducts } from "../redux/slices/productSlice";
+import { fetchProducts } from "../redux/Slices/productSlice";
 import { addtoCart } from "../redux/Slices/cardSlice";
 import { addtoWishlist } from "../redux/Slices/wishSlices";
 import { GrFormPrevious } from "react-icons/gr";
