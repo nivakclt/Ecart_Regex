@@ -6,12 +6,14 @@ import Header from './components/Header'
 import Pnf from './pages/Pnf'
 import Wishlist from './pages/Wishlist'
 import { Routes, Route } from 'react-router-dom'
+import SmoothScroll from '../src/SmoothScroll'
 
 import './ReduxCart.css'
 
 function App() {
   return (
     <>
+    <SmoothScroll/>
       <Header />
 
       <Routes>
