@@ -3,13 +3,7 @@ import { useEffect } from "react";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import {
-  fetchProducts,
-  nextPage,
-  prevPage
-} from "../redux/Slices/ProductSlice";
-
+import { fetchProducts, nextPage, prevPage } from "../redux/Slices/productSlice";
 import { addtoCart } from "../redux/Slices/cardSlice";
 import { addtoWishlist } from "../redux/Slices/wishSlices";
 
