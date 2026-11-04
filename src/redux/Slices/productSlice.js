@@ -12,8 +12,8 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-const  = createSlice({
-  name: "products",
+const productSlice = createSlice({
+    name: "products",
 
   initialState: {
     pending: false,
@@ -56,5 +56,5 @@ const  = createSlice({
   },
 });
 
-export default .reducer;
-export const { searchProducts,nextPage,prevPage } = .actions;
+export default productSlice.reducer;
+export const { searchProducts,nextPage,prevPage } = productSlice.actions;

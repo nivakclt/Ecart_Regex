@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa6";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchProducts } from "../redux/Slices/";
+import { fetchProducts } from "../redux/Slices/productSlice";
 function ProductView() {
   const { id } = useParams();
   const dispatch = useDispatch();

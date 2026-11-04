@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { FaOpencart, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { searchProducts } from "../redux/Slices/";
+import { searchProducts } from "../redux/Slices/productSlice";
 function Header() {
   const { cart } = useSelector(state => state.cartReducer);
   const { wishlist } = useSelector(state => state.wishListReducer);
