@@ -1,125 +1,200 @@
+
 import { useEffect } from "react";
-import { FaCartPlus } from "react-icons/fa";
-import { FaHeartCirclePlus } from "react-icons/fa6";
+import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
-import { fetchProducts } from "./Slices/ProductSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  fetchProducts,
+  nextPage,
+  prevPage
+} from "../redux/Slices/ProductSlice";
+
 import { addtoCart } from "../redux/Slices/cardSlice";
 import { addtoWishlist } from "../redux/Slices/wishSlices";
+
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
-import { nextPage, prevPage } from "./Slices/ProductSlice";
 
 function Home() {
-    const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-    const {products,error,pending,currentPage}=useSelector(state=>state.productReducer)
-    console.log(products)
+  const {
+    products,
+    error,
+    pending,
+    currentPage
+  } = useSelector(state => state.productReducer);
 
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-    useEffect(()=>{
-        dispatch(fetchProducts());
-    },[dispatch])
+  const productsPerPage = 10;
+  const totalPages = Math.ceil(products.length / productsPerPage);
 
-    const productsPerPage=10;
-    const totalPages=Math.ceil((products.length)/productsPerPage)
-    const endIndex=currentPage*10
-    const startIndex=endIndex-10
+  const endIndex = currentPage * productsPerPage;
+  const startIndex = endIndex - productsPerPage;
 
-    const handleNext=()=>{
-      if(currentPage<totalPages)
-        dispatch(nextPage());
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      dispatch(nextPage());
     }
+  };
 
-    const handlePrev=()=>{
-      if(currentPage>1)
-        dispatch(prevPage());
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      dispatch(prevPage());
     }
+  };
 
   return (
-    <>
+    <main className="home-page">
 
-        {/* <!-- Header--> */}
-        <header className="py-5" style={{backgroundColor:"black"}}>
-            <div className="container px-4 px-lg-5 my-5">
-                <div className="text-center text-white">
-                    <h1 className="display-4 fw-bolder text-light">Shop in style</h1>
-                    <p className="lead fw-normal text-white-50 mb-0">by your style</p>
-                </div>
+      {/* HERO SECTION */}
+
+      <section className="home-hero">
+        <div className="container">
+          <p className="hero-eyebrow">REDUXCART COLLECTION</p>
+
+          <h1>Find Your Style.</h1>
+
+          <p className="hero-description">
+            Discover products made for your everyday life.
+          </p>
+
+          <a href="#products" className="hero-link">
+            Explore Collection
+          </a>
+        </div>
+      </section>
+
+      {/* PRODUCT SECTION */}
+
+      <section className="home-products" id="products">
+        <div className="container-fluid px-4 px-lg-5">
+
+          <div className="products-heading">
+            <div>
+              <p className="section-eyebrow">OUR COLLECTION</p>
+              <h2>Popular Products</h2>
             </div>
-        </header>
 
-        {/* <!-- Section--> */}
-       
-      <section className="py-5">
-        <div className="container px-4 px-lg-5 mt-5">
+            <span className="products-count">
+              {products.length} Products
+            </span>
+          </div>
 
-          {
-          pending ? (
-            <div className="text-center">
-              <h3>Loading...</h3>
+          {pending ? (
+            <div className="home-message">
+              <p>Loading products...</p>
             </div>
           ) : error?.length > 0 ? (
-            <div className="text-center text-danger">
-              <h3>{error}</h3>
+            <div className="home-message error-message">
+              <p>{error}</p>
+            </div>
+          ) : products.length === 0 ? (
+            <div className="home-message">
+              <p>No products available.</p>
             </div>
           ) : (
-            <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div className="home-product-grid">
 
-              {products.slice(startIndex,endIndex).map((product) => (
-                <div className="col mb-5" key={product.id}>
-                  <div className="card h-100">
+              {products.slice(startIndex, endIndex).map(product => (
 
-                    <Link to={`/product/${product.id}`}>
+                <article className="home-product-card" key={product.id}>
+
+                  <Link
+                    to={`/product/${product.id}`}
+                    className="product-image-link"
+                  >
+                    <div className="product-image-box">
                       <img
-                        className="card-img-top"
                         src={product?.thumbnail}
                         alt={product?.title}
+                        loading="lazy"
                       />
-                    </Link>
+                    </div>
+                  </Link>
 
-                    <div className="card-body p-4">
-                      <div className="text-center">
-                        <h5 className="fw-bolder">
-                          {product?.title}
-                        </h5>
+                  <div className="product-info">
 
-                        ${product?.price}
-                      </div>
+                    <div className="product-details">
+                      <Link to={`/product/${product.id}`}>
+                        <h3>{product?.title}</h3>
+                      </Link>
+
+                      <p>{product?.category}</p>
+
+                      <h4>${product?.price}</h4>
                     </div>
 
-                    <div className="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-around">
-                      <button className="btn" onClick={()=>{dispatch(addtoCart(product))}}>
-                        <FaCartPlus className="text-success"/>
+                    <div className="product-actions">
+
+                      <button
+                        type="button"
+                        className="product-action-btn"
+                        onClick={() => dispatch(addtoCart(product))}
+                        title="Add to Cart"
+                        aria-label="Add to Cart"
+                      >
+                        <FaCartPlus />
                       </button>
-                      <button className="btn" onClick={()=>{dispatch(addtoWishlist(product))}}>
-                      <FaHeartCirclePlus className="text-danger"/>
+
+                      <button
+                        type="button"
+                        className="product-action-btn"
+                        onClick={() => dispatch(addtoWishlist(product))}
+                        title="Add to Wishlist"
+                        aria-label="Add to Wishlist"
+                      >
+                        <FaHeart />
                       </button>
 
                     </div>
+
                   </div>
-                </div>
+
+                </article>
+
               ))}
+
+            </div>
+          )}
+
+          {/* PAGINATION */}
+
+          {!pending && !error?.length && totalPages > 1 && (
+            <div className="home-pagination">
+
+              <button
+                onClick={handlePrev}
+                disabled={currentPage === 1}
+                aria-label="Previous page"
+              >
+                <GrFormPrevious />
+              </button>
+
+              <span>
+                {currentPage} / {totalPages}
+              </span>
+
+              <button
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+                aria-label="Next page"
+              >
+                <MdNavigateNext />
+              </button>
 
             </div>
           )}
 
         </div>
       </section>
-      <div>
-        <div className="container d-flex justify-content-center align-items-center gap-2 my-3">
-          <button className="btn btn-outline-light" onClick={handlePrev}>
-            <GrFormPrevious />
-          </button>
-          <span>{currentPage}</span>
-          <button className="btn btn-outline-light" onClick={handleNext}>
-            <MdNavigateNext />
-          </button>
-        </div>
-      </div>
-        </>
 
-  )
+    </main>
+  );
 }
 
-export default Home
+export default Home;
